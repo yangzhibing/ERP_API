@@ -1,0 +1,8 @@
+flask
+flask-script
+flask-restful
+flask-oauthlib
+flask-cors
+redis
+wechatpy
+cryptography

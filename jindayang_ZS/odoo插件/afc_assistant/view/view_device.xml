@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_device" model="ir.ui.view">
+            <field name="name">AFC Device FORM</field>
+            <field name="type">form</field>
+            <field name="model">afc.device</field>
+            <field name="arch" type="xml">
+                <form string="设备">
+                    <sheet>
+                        <group string="设备信息">
+                            <group name="group_left">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <field name="deviceType"/>
+                                <field name="deviceCode"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="country"/>
+                                <field name="city"/>
+                                <field name="line"/>
+                                <field name="station"/>
+                            </group>
+                            <field name="itemModels" widget="one2many_list">
+                                <tree string="Items" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_device" model="ir.ui.view">
+            <field name="name">AFC Device</field>
+            <field name="type">tree</field>
+            <field name="model">afc.device</field>
+            <field name="arch" type="xml">
+                <tree string="设备">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="deviceType"/>
+                    <field name="deviceCode"/>
+                    <field name="country"/>
+                    <field name="city"/>
+                    <field name="line"/>
+                    <field name="station"/>
+                    <field name="itemModels"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

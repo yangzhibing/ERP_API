@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_fault" model="ir.ui.view">
+            <field name="name">AFC Fault</field>
+            <field name="type">form</field>
+            <field name="model">afc.fault</field>
+            <field name="arch" type="xml">
+                <form string="故障">
+                    <sheet>
+                        <group string="故障信息">
+                            <group name="group_left">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <field name="faultType"/>
+                                <field name="deviceID"
+                                       attrs="{'invisible':[('faultType','!=','type_1')]}"/>
+                                <field name="moduleID"
+                                       attrs="{'invisible':[('faultType','!=','type_2')]}"/>
+                                <field name="faultContent"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_fault" model="ir.ui.view">
+            <field name="name">AFC Fault</field>
+            <field name="type">tree</field>
+            <field name="model">afc.fault</field>
+            <field name="arch" type="xml">
+                <tree string="故障">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="faultType"/>
+                    <field name="deviceID"/>
+                    <field name="moduleID"/>
+                    <field name="faultContent"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

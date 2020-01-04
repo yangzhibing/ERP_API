@@ -1,0 +1,37 @@
+# -*- encoding: utf-8 -*-
+from flask import jsonify, request, json
+from os import path
+from flask import Blueprint
+from ..config import Config
+
+test_blueprint = Blueprint(
+    'test',
+    __name__,
+    template_folder=path.join(path.pardir, 'templates', 'test'),
+    url_prefix="/test"
+)
+
+
+@test_blueprint.route('/get/erp', methods=['GET'])
+def get_erp_buy_record():
+    # user_id = request.args.get('user_id', None)
+    # state = request.args.get('state', None)
+    result = {}
+
+    result = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                      'warehouse', 'search_read',
+                                      [[['name', '=', Config.wh_name]]],
+                                      {'fields': ['id']}
+                                      )
+    return jsonify({'data': result})
+    # 仓库ID
+    wh_id = result[0]['id']
+
+    # result = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+    #                                   'wh.move.line', 'search_read',
+    #                                   [[['warehouse_dest_id', '=', wh_id], ['qty_remaining', '>', 0]]],
+    #                                   {'fields': ['goods_id', 'lot', 'lot_id', 'attribute_id', 'qty_remaining',
+    #                                               'uos_qty_remaining']}
+    #                                   )
+    #
+    # return jsonify({'data': result})

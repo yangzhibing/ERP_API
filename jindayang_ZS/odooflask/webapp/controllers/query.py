@@ -1,0 +1,130 @@
+# -*- encoding: utf-8 -*-
+from flask import Flask, jsonify, request, json, session, abort, redirect
+# 导入xmlrpc库，这个库是python的标准库。
+import xmlrpclib
+import datetime
+from os import path
+from flask import Blueprint
+from ..config import Config
+
+query_blueprint = Blueprint(
+    'query',
+    __name__,
+    template_folder=path.join(path.pardir, 'templates', 'query'),
+    url_prefix="/query"
+)
+
+
+@query_blueprint.route('/get_repair_record_by_device_code', methods=['GET'])
+def get_repair_record_by_device_code():
+    user_id = request.args.get('user_id', None)
+    code = request.args.get('code', None)
+    result = {}
+    if user_id:
+
+        odoo_uids = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                             'res.users', 'search',
+                                             [[['id', '=', user_id]]])
+        if odoo_uids:
+            device_info = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                 'afc.device', 'search_read',
+                                                 [[['deviceCode', '=', code]]],
+                                                 {'fields': ['deviceCode', 'deviceType', 'deviceCountry', 'deviceCity',
+                                                             'deviceLine', 'deviceStation']})
+            if device_info is None or len(device_info) == 0:
+                return jsonify({'data': None})
+            result = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                              'afc.repair.form', 'search_read',
+                                              [[['deviceId', '=', device_info[0]['id']]]],
+                                              {'fields': ['deviceId', 'userId', 'userName', 'faultReason', 'solutions',
+                                                          'repairParts', 'delayReason', 'remarks']})
+
+    return jsonify({'data': result})
+
+
+@query_blueprint.route('/query_repair_apply', methods=['POST'])
+def query_apply_record():
+    # 固定参数
+    model_name = 'afc.repair.apply'
+    # 接收参数
+    post_data = request.json
+    res_apply = []
+    print(post_data)
+    # 非空处理
+    query_condition = []
+    if post_data is None:
+        return jsonify({'data': False})
+    else:
+        if post_data.has_key('user_id') and post_data['user_id'] is not None:
+            user_id = post_data['user_id']
+        else:
+            user_id = None
+        # 验证当前登录用户
+        if user_id is None:
+            return jsonify({'data': []})
+        else:
+            user_ids = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                'res.users', 'search',
+                                                [[['id', '=', user_id]]])
+            # 用户存在
+            if user_ids is []:
+                return jsonify({'data': []})
+            else:
+                #if post_data.has_key(u'station') and post_data[u'station'] is None:
+                #    query_condition.append(['station', '=', post_data[u'station']])
+                if post_data.has_key(u'applyUserId') and post_data[u'applyUserId'] is not None:
+                    query_condition.append(['userId', '=', post_data[u'applyUserId']])
+                if post_data.has_key('recordContent') and post_data['recordContent'] is not None and unicode(post_data['recordContent']) != u"":
+                    query_condition.append(['recordContent', 'like', post_data['recordContent']])
+                if post_data.has_key('starttime') and post_data['starttime'] is not None:
+                    query_condition.append(['write_date', '>', post_data['starttime']])
+                if post_data.has_key('endtime') and post_data['endtime'] is not None:
+                    query_condition.append(['write_date', '<', post_data['endtime']])
+                print(query_condition)
+                apply = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                     model_name, 'search_read',
+                                                     [ query_condition ]
+                                                     )
+                if post_data.has_key(u'station') and post_data[u'station'] is not None:
+                    for a in apply:
+                        devices = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                 'afc.device', 'search',
+                                                 [[['id', '=', int(a['deviceId'][0])], ['station', '=', post_data['station']]]])
+                        if len(devices) > 0:
+                            res_apply.append(a)
+
+                else:
+                    res_apply.append(apply)
+
+                for r in res_apply:
+                    if r['deviceId'] is not None:
+                        device_info = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                               'afc.device', 'search_read',
+                                                               [[['id', '=', int(r['deviceId'][0])]]]
+                                                               )
+                        if device_info is not None and len(device_info) != 0:
+                            r['device_info'] = device_info[0]
+                return jsonify({'data': res_apply})
+
+
+@query_blueprint.route('/get_apply_users_info', methods=['GET'])
+def query_apply_users_info():
+    user_id = request.args.get('user_id', None)
+
+    result = {}
+    if user_id:
+
+        odoo_uids = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                             'res.users', 'search',
+                                             [[['id', '=', user_id]]])
+        if odoo_uids:
+            result = Config.models.execute_kw(Config.dbname, Config.uid, Config.password,
+                                                   'res.users', 'search_read',
+                                                   [[['active', '=', True]]],
+                                                   {'fields': ['name' ]})
+
+    return jsonify({'data': result})
+
+
+
+

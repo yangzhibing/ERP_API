@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_row" model="ir.ui.view">
+            <field name="name">AFC Row</field>
+            <field name="type">form</field>
+            <field name="model">afc.row</field>
+            <field name="arch" type="xml">
+                <form string="行数据">
+                    <sheet>
+                        <group string="行数据信息">
+                            <group name="group_left">
+                                <field name="nodeId"/>
+                                <field name="elementModels"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_row" model="ir.ui.view">
+            <field name="name">AFC Row</field>
+            <field name="type">tree</field>
+            <field name="model">afc.row</field>
+            <field name="arch" type="xml">
+                <tree string="行数据">
+                    <field name="nodeId"/>
+                    <field name="elementModels"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

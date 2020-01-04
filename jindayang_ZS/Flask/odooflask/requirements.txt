@@ -1,0 +1,6 @@
+flask
+flask-script
+flask-restful
+flask-cors
+redis
+cryptography

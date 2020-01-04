@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_solution" model="ir.ui.view">
+            <field name="name">AFC Solution</field>
+            <field name="type">form</field>
+            <field name="model">afc.solution</field>
+            <field name="arch" type="xml">
+                <form string="故障解决方案">
+                    <sheet>
+                        <group string="故障解决方案">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="faultName"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                            <field name="solutionItemModels" widget="one2many_list">
+                                <tree string="Items" editable="bottom">
+                                    <field name="genre"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_solution" model="ir.ui.view">
+            <field name="name">AFC Solution</field>
+            <field name="type">tree</field>
+            <field name="model">afc.solution</field>
+            <field name="arch" type="xml">
+                <tree string="故障解决方案">
+                    <field name="name"/>
+                    <field name="faultName"/>
+                    <field name="solutionItemModels"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

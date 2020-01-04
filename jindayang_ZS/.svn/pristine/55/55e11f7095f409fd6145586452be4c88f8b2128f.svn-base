@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_module" model="ir.ui.view">
+            <field name="name">AFC Module</field>
+            <field name="type">form</field>
+            <field name="model">afc.module</field>
+            <field name="arch" type="xml">
+                <form string="模型">
+                    <sheet>
+                        <group string="模型信息">
+                            <group name="group_left">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <field name="has_parent"/>
+                                <field name="deviceID"
+                                       attrs="{'invisible':[('has_parent','=',True)]}"/>
+                                <field name="parentId"
+                                       attrs="{'invisible':[('has_parent','=',False)]}"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_module" model="ir.ui.view">
+            <field name="name">AFC Module</field>
+            <field name="type">tree</field>
+            <field name="model">afc.module</field>
+            <field name="arch" type="xml">
+                <tree string="模型">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="has_parent"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

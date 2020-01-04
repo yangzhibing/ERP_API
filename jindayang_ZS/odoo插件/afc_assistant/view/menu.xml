@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!--动作定义-->
+
+        <record id="action_afc_device" model="ir.actions.act_window">
+            <field name="name">AFC Device</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.device</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建新设备</p>
+            </field>
+        </record>
+
+        <record id="action_afc_device_item" model="ir.actions.act_window">
+            <field name="name">AFC Device Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.device.item</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建新设备参数</p>
+            </field>
+        </record>
+
+        <record id="action_afc_module" model="ir.actions.act_window">
+            <field name="name">AFC Module</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.module</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">模块建模</p>
+            </field>
+        </record>
+
+        <record id="action_afc_repair_apply" model="ir.actions.act_window">
+            <field name="name">AFC Repair Apply</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.repair.apply</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建设备报修</p>
+            </field>
+        </record>
+
+        <record id="action_afc_fault" model="ir.actions.act_window">
+            <field name="name">AFC Fault</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.fault</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">故障建模</p>
+            </field>
+        </record>
+
+        <record id="action_afc_repair_task" model="ir.actions.act_window">
+            <field name="name">AFC Repair Task</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.repair.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">维修任务指定</p>
+            </field>
+        </record>
+
+        <record id="action_afc_repair_form" model="ir.actions.act_window">
+            <field name="name">AFC Repair From</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.repair.form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建维修单</p>
+            </field>
+        </record>
+
+        <record id="action_afc_solution" model="ir.actions.act_window">
+            <field name="name">AFC Solution</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.solution</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建故障解决方案</p>
+            </field>
+        </record>
+
+        <record id="action_afc_solution_item" model="ir.actions.act_window">
+            <field name="name">AFC Solution Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.solution.item</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建故障解决方案选项</p>
+            </field>
+        </record>
+
+
+        <record id="action_afc_attribute_element" model="ir.actions.act_window">
+            <field name="name">AFC Attribute Element</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.attribute.element</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建属性元素</p>
+            </field>
+        </record>
+
+        <record id="action_afc_query_element" model="ir.actions.act_window">
+            <field name="name">AFC Query Element</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.query.element</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建属性元素</p>
+            </field>
+        </record>
+
+        <record id="action_afc_row" model="ir.actions.act_window">
+            <field name="name">AFC Row</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">afc.row</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建行数据</p>
+            </field>
+        </record>
+
+        <!--AFC 维修管理-->
+        <menuitem id="main_afc" name="AFC维管"/>
+
+        <menuitem id="main_afc_menu_device" name="设备" parent="main_afc"/>
+
+        <menuitem id="main_afc_menu_apply" name="报修" parent="main_afc"/>
+
+        <menuitem id="main_afc_menu_repair" name="维修" parent="main_afc"/>
+
+        <menuitem id="main_afc_menu_element" name="元素" parent="main_afc"/>
+
+
+        <menuitem id="main_afc_device" name="设备" parent="main_afc_menu_device"
+                  action="action_afc_device"/>
+
+        <menuitem id="main_afc_device_item" name="设备参数" parent="main_afc_menu_device"
+                  action="action_afc_device_item"/>
+
+        <menuitem id="main_afc_module" name="模块" parent="main_afc_menu_device"
+                  action="action_afc_module"/>
+
+
+        <menuitem id="main_afc_repair_apply" name="设备报修" parent="main_afc_menu_apply"
+                  action="action_afc_repair_apply"/>
+
+        <menuitem id="main_afc_fault" name="故障" parent="main_afc_menu_apply"
+                  action="action_afc_fault"/>
+
+
+        <menuitem id="main_afc_repair_task" name="任务分派" parent="main_afc_menu_repair"
+                  action="action_afc_repair_task"/>
+
+        <menuitem id="main_afc_repair_form" name="维修表" parent="main_afc_menu_repair"
+                  action="action_afc_repair_form"/>
+
+        <menuitem id="main_afc_solution" name="故障解决方案" parent="main_afc_menu_repair"
+                  action="action_afc_solution"/>
+        <menuitem id="main_afc_solution_item" name="故障解决方案单项" parent="main_afc_menu_repair"
+                  action="action_afc_solution_item"/>
+
+
+        <menuitem id="main_afc_attribute_element" name="属性元素" parent="main_afc_menu_element"
+                  action="action_afc_attribute_element"/>
+
+        <menuitem id="main_afc_query_element" name="查询元素" parent="main_afc_menu_element"
+                  action="action_afc_query_element"/>
+
+        <menuitem id="main_afc_row" name="行数据" parent="main_afc_menu_element"
+                  action="action_afc_row"/>
+    </data>
+</openerp>
+
+

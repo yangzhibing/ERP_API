@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_device_item" model="ir.ui.view">
+            <field name="name">AFC Device Item</field>
+            <field name="type">form</field>
+            <field name="model">afc.device.item</field>
+            <field name="arch" type="xml">
+                <form string="设备参数">
+                    <sheet>
+                        <group string="设备">
+                            <group name="group_left">
+                                <field name="device_id"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                        <group string="设备参数信息">
+                            <group name="group_left">
+                                <field name="name"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="value"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_device_item" model="ir.ui.view">
+            <field name="name">AFC Device Item</field>
+            <field name="type">tree</field>
+            <field name="model">afc.device.item</field>
+            <field name="arch" type="xml">
+                <tree string="设备参数">
+                    <field name="name"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

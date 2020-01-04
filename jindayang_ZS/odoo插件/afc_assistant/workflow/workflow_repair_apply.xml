@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        整机报修工作流
+        <record model="workflow" id="workflow_device_apply">
+            <field name="name">整机报修模板</field>
+            <field name="osv">afc.repair.apply</field>
+            <field name="on_create">False</field>
+        </record>
+
+        Activity
+        <record model="workflow.activity" id="activity_draft">
+            <field name="wkf_id" ref="workflow_device_apply"/>
+            <field name="name">apply_draft</field>
+              <field name="kind">function</field>
+            <field name="action">do_draft()</field>
+            <field name="flow_start">True</field>
+        </record>
+
+        <record model="workflow.activity" id="activity_sel_type">
+            <field name="wkf_id" ref="workflow_device_apply"/>
+            <field name="name">sel_type</field>
+            <field name="kind">function</field>
+            <field name="action">do_sel_type()</field>
+        </record>
+
+        <record model="workflow.activity" id="activity_sel_module">
+            <field name="wkf_id" ref="workflow_device_apply"/>
+            <field name="name">sel_module</field>
+            <field name="kind">function</field>
+            <field name="action">do_sel_module()</field>
+        </record>
+
+        <record model="workflow.activity" id="activity_sel_fault">
+            <field name="wkf_id" ref="workflow_device_apply"/>
+            <field name="name">sel_fault</field>
+            <field name="kind">function</field>
+            <field name="action">do_sel_fault()</field>
+        </record>
+
+         <record model="workflow.activity" id="activity_commit">
+            <field name="wkf_id" ref="workflow_device_apply"/>
+            <field name="name">commit</field>
+            <field name="kind">function</field>
+            <field name="action">do_commit()</field>
+            <field name="flow_end">True</field>
+        </record>
+
+
+        Transition
+        <record model="workflow.transition" id="transition_1">
+            <field name="act_from" ref="activity_draft"/>
+            <field name="act_to" ref="activity_sel_type"/>
+            <field name="signal">sel_device_type</field>
+        </record>
+
+        <record model="workflow.transition" id="transition_2">
+            <field name="act_from" ref="activity_sel_type"/>
+            <field name="act_to" ref="activity_sel_fault"/>
+            <field name="signal">sel_fault</field>
+        </record>
+
+        <record model="workflow.transition" id="transition_3">
+            <field name="act_from" ref="activity_sel_fault"/>
+            <field name="act_to" ref="activity_commit"/>
+            <field name="signal">do_commit</field>
+        </record>
+    </data>
+</openerp>

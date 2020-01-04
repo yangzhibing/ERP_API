@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_repair_type" model="ir.ui.view">
+            <field name="name">AFC Repair Type</field>
+            <field name="type">form</field>
+            <field name="model">afc.repair.type</field>
+            <field name="arch" type="xml">
+                <form string="报修类型">
+                    <sheet>
+                        <group string="模型信息">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="faultId"/>
+                                <field name="moduleId"/>
+                                <field name="moduleName"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_repair_type" model="ir.ui.view">
+            <field name="name">AFC Repair Type</field>
+            <field name="type">tree</field>
+            <field name="model">afc.repair.type</field>
+            <field name="arch" type="xml">
+                <tree string="模型">
+                    <field name="name"/>
+                    <field name="faultId"/>
+                    <field name="moduleId"/>
+                    <field name="moduleName"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

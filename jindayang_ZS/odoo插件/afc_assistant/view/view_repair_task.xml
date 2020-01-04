@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_repair_task" model="ir.ui.view">
+            <field name="name">AFC Repair Task</field>
+            <field name="type">form</field>
+            <field name="model">afc.repair.task</field>
+            <field name="arch" type="xml">
+                <form string="维修任务">
+                    <sheet>
+                        <group string="维修任务">
+                            <group name="group_left">
+                                <field name="RepairApplyId"/>
+                                <field name="repair_user_id"/>
+                                <field name="is_confirm"/>
+                                <field name="is_complete"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_repair_task" model="ir.ui.view">
+            <field name="name">AFC Repair Task</field>
+            <field name="type">tree</field>
+            <field name="model">afc.repair.task</field>
+            <field name="arch" type="xml">
+                <tree string="维修任务">
+                    <field name="RepairApplyId"/>
+                    <field name="repair_user_id"/>
+                    <field name="is_confirm"/>
+                    <field name="is_complete"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

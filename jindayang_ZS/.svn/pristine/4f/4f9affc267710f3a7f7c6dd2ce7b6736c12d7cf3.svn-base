@@ -1,0 +1,23 @@
+from flask import Flask, redirect, url_for
+from flask_cors import *
+from config import DevConfig
+
+from controllers.workflow import workflow_blueprint
+from controllers.wechat import wechat_blueprint
+from controllers.apply import apply_blueprint
+from controllers.repair import repair_blueprint
+from controllers.query import query_blueprint
+app = Flask(__name__)
+app.secret_key = 'very hard code'
+CORS(app, support_credentials=True, max_age=3600)
+
+app.config.from_object(DevConfig)
+
+app.register_blueprint(workflow_blueprint)
+app.register_blueprint(wechat_blueprint)
+app.register_blueprint(apply_blueprint)
+app.register_blueprint(repair_blueprint)
+app.register_blueprint(query_blueprint)
+
+if __name__ == '__main__':
+    app.run()

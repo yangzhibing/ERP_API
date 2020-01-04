@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- form 视图-->
+        <record id="form_view_afc_repair_apply" model="ir.ui.view">
+            <field name="name">AFC Repair Apply</field>
+            <field name="type">form</field>
+            <field name="model">afc.repair.apply</field>
+            <field name="arch" type="xml">
+
+                <form string="设备报修">
+                     <header>
+                        <button name="sel_device_type" states="draft" string="整机报修" type="workflow"
+                                class="oe_highlight"/>
+                        <button name="sel_fault" states="commit" string="确认选择" type="workflow"
+                                class="oe_highlight"/>
+                        <button name="do_commit" states="commit" string="不同意" type="workflow"
+                                class="oe_highlight"/>
+
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,sel_type,sel_fault,commit"
+                               readonly="1"
+                               statusbar_colors='{"refuse":"red","complete":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group string="设备报修">
+                            <group name="group_left">
+                                <field name="name"/>
+                                <field name="deviceId"/>
+                                <field name="applyType"/>
+                                <field name="module"
+                                       attrs="{'invisible':[('applyType','!=','type_2')]}"/>
+                                <field name="userId"/>
+                                <field name="fault_type_1"
+                                       attrs="{'invisible':[('applyType','!=','type_1')]}"
+                                       domain="[('deviceID', '=',deviceId)]"/>
+                                <field name="fault_type_2"
+                                       attrs="{'invisible':[('applyType','!=','type_2')]}"
+                                       domain="[('moduleID', '=',module)]"/>
+                                <field name="recordContent"/>
+                                <field name="is_allocation"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- tree(list)视图 -->
+        <record id="tree_view_afc_repair_apply" model="ir.ui.view">
+            <field name="name">AFC Module</field>
+            <field name="type">tree</field>
+            <field name="model">afc.repair.apply</field>
+            <field name="arch" type="xml">
+                <tree string="设备报修">
+                    <field name="name"/>
+                    <field name="deviceId"/>
+                    <field name="applyType"/>
+                    <field name="module"/>
+                    <field name="userId"/>
+                    <field name="recordContent"/>
+                    <field name="is_allocation"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
